@@ -13,14 +13,14 @@ public class forLoop {
     Total += markGivenFirst;
 
     for (0 <= Total && Total > marksAvailable - 1){
-      System.out.print(str("Input Next Mark: "));
+      System.out.print( str("Input Next Mark: ") );
       int markGiven = in.nextInt();
       if (markGiven != int) break;
       else (Total += markGiven) continue;
     }
-    System.out.print("Input No Of Questions: ");
+    System.out.println("Input No Of Questions: ");
     int noOfQ = in.nextInt();
     float Avrg = Total / noOfQ;
-    System.out.print(int(Avrg));
+    System.out.println( int(Avrg) );
   }
 }
