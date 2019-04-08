@@ -1,3 +1,5 @@
+package q1java;
+
 import java.util.regex;
 
 public class RugbyPlayer {
@@ -28,7 +30,13 @@ public class RugbyPlayer {
     this.teamID = teamID;
     this.stdmName = stdmName;
     this.stdmTown = stdmTown;
-    this.stdmPstCde = stdmPstCde;
+    try{
+      if stdmPstCde.matches("^[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9][A-Z]{2}$")
+        this.stdmPstCde = stdmPstCde;
+    }
+    catch(Exception e){
+      System.out.println("Invalid post code for the Stadium!\n")
+    }
     this.stdmStreet = stdmStreet;
   }
 
@@ -83,10 +91,10 @@ public class RugbyPlayer {
   }
 
   public String getStdmPstCde(){
-    if
+    return stdmPstCde
   }
 
   public String playerToString(){
-    return ( "Player Name: " + Name + " \nPlayer ID: " + playerID + " \nTries Scored: " + triesScored + " \nTeam Name: " + teamName + " \nTeam ID: " + teamID + " \nStadium Name: " + stdmName + " \nStadium Street: " + stdmStreet + " \nStadium Town: " + stdmTown + " \nStadium Postcode: " + stdmPstCde)
+    return ( "\nPlayer Name: " + Name + " \nPlayer ID: " + playerID + " \nTries Scored: " + triesScored + " \nTeam Name: " + teamName + " \nTeam ID: " + teamID + " \nStadium Name: " + stdmName + " \nStadium Street: " + stdmStreet + " \nStadium Town: " + stdmTown + " \nStadium Postcode: " + stdmPstCde)
   }
 }
