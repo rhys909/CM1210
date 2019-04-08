@@ -46,7 +46,12 @@ public class RugbyPlayer {
 
   //Methods
   public String getName(){
-    return Name;
+    if Name.matches("\D"){
+      return Name;
+    }
+    else{
+
+    }
   }
 
   public String getPlyrID(){
@@ -78,6 +83,10 @@ public class RugbyPlayer {
   }
 
   public String getStdmPstCde(){
-    return stdmPstCde;
+    if
+  }
+
+  public String playerToString(){
+    return ( "Player Name: " + Name + " \nPlayer ID: " + playerID + " \nTries Scored: " + triesScored + " \nTeam Name: " + teamName + " \nTeam ID: " + teamID + " \nStadium Name: " + stdmName + " \nStadium Street: " + stdmStreet + " \nStadium Town: " + stdmTown + " \nStadium Postcode: " + stdmPstCde)
   }
 }

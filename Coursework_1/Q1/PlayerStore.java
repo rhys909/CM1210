@@ -1,6 +1,6 @@
 import java.util.regex;
 
 public class PlayerStore{
-Public static void main(String args[]){
-
+  public static void main(String args[]){
+    
 }}
