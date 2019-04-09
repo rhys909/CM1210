@@ -23,7 +23,14 @@ public class RugbyPlayer {
   }
 
   public RugbyPlayer(String Name, int playerID, int triesScored, String teamName, int teamID, String stdmName, String stdmTown, String stdmPstCde, String stdmStreet){
-    this.Name = Name;
+    try{
+      if Name.matches("^[A-Z]{1}[a-z]+[A-Z]{1}[a-z]+$"){
+        this.Name = Name;
+      }
+    catch(Exception e){
+      System.out.println("Invalid Name for the player!\n")
+    }
+    }
     this.playerID = playerID;
     this.triesScored = triesScored;
     this.teamName = teamName;
@@ -54,12 +61,7 @@ public class RugbyPlayer {
 
   //Methods
   public String getName(){
-    if Name.matches("\D"){
       return Name;
-    }
-    else{
-
-    }
   }
 
   public String getPlyrID(){
