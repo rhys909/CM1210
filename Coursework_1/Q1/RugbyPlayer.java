@@ -14,6 +14,7 @@ public class RugbyPlayer {
   private String stdmPstCde;
 
   //Constructors
+  
   public RugbyPlayer(String Name, int playerID, int triesScored, String teamName, int teamID){
     this.Name = Name;
     this.playerID = playerID;
@@ -27,6 +28,7 @@ public class RugbyPlayer {
       if Name.matches("^[A-Z]{1}[a-z]+[A-Z]{1}[a-z]+$"){
         this.Name = Name;
       }
+    }
     catch(Exception e){
       System.out.println("Invalid Name for the player!\n")
     }
@@ -59,7 +61,22 @@ public class RugbyPlayer {
     stdmStreet = "";
   }
 
+  public void readFile(String filename){
+    try {
+      File file =new File(filename);
+      BufferedReader br = new BufferedReader(new FileReader(file));
+      String line;
+      while ((line = br.readLine()) != null){
+        System.out.println(line);
+      }
+      catch(IOException e){
+        System.out.println("Filename error!")
+      }
+    }
+  }
+
   //Methods
+
   public String getName(){
       return Name;
   }
