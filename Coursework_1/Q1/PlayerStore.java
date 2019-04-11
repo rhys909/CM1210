@@ -8,7 +8,7 @@ public class PlayerStore{
     Scanner numGet = new Scanner(System.in);
 
     RugbyPlayer player = new RugbyPlayer();
-
+    //True whilst user wants to add or remove players is set to false when user choice == 10
     boolean open = true;
     String fileLoader = "";
 
@@ -29,108 +29,108 @@ public class PlayerStore{
       int userChoice = numGet.nextInt();
       String invalidInput;
 
-      switch (userChoice) {
-      case 1:
-        try {
-          Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
-        }
-        catch(Exception e){
 
-        }
-        break;
-      case 2:
-        try {
-            System.out.println("Please enter the players first and last names seperated by a space.\n");
-            String Name = textGet.nextString();
-            System.out.println();
-            String playerID = textGet.nextString();
-            System.out.println();
-            int triesScored = numGet.nextInt();
-            System.out.println();
-            String teamName = textGet.nextString();
-            System.out.println();
-            String teamID = textGet.nextString();
-            System.out.println();
-            String stdmName = textGet.nextString();
-            System.out.println();
-            String stdmStreet = textGet.nextString();
-            System.out.println();
-            String stdmTown = textGet.nextString();
-            System.out.println();
-            String stdmPstCde = textGet.nextString();
+        switch (userChoice) {
+          case 1:
+            try {
+              Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
+            }
+            catch(Exception e){
 
-            RugbyPlayer player = new RugbyPlayer(String Name, int playerID, int triesScored, String teamName, int teamID, String stdmName, String stdmTown, String stdmPstCde, String stdmStreet);
+            }
+            break;
+          case 2:
+            try {
+              System.out.println("Please enter the players first and last names seperated by a space.\n");
+              String Name = textGet.nextString();
+              System.out.println("Please enter the player ID in the format RFU***** where * is a digit.\n");
+              String playerID = textGet.nextString();
+              System.out.println();
+              int triesScored = numGet.nextInt();
+              System.out.println();
+              String teamName = textGet.nextString();
+              System.out.println();
+              String teamID = textGet.nextString();
+              System.out.println();
+              String stdmName = textGet.nextString();
+              System.out.println();
+              String stdmStreet = textGet.nextString();
+              System.out.println();
+              String stdmTown = textGet.nextString();
+              System.out.println();
+              String stdmPstCde = textGet.nextString();
+              //generate a player
+              RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
+              //add the player to the hash map
+              RugbyPlayersTable.put(playerID, player.playerToString())
+            }
+            catch(Exception e){
+              System.out.println("Error adding the player to dictionary")
+            }
+            break;
+          case 3:
+            try {
 
-            RugbyPlayersTable.put(playerID, RugbyPlayer.playerToString())
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 3:
-        try {
+            }
+            break;
+          case 4:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 4:
-        try {
+            }
+            break;
+          case 5:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 5:
-        try {
+            }
+            break;
+          case 6:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 6:
-        try {
+            }
+            break;
+          case 7:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      }
-      case 7:
-        try {
+            }
+            break;
+          case 8:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 8:
-        try {
+            }
+            break;
+          case 9:
+            try {
 
-        }
-        catch(Exception e){
+            }
+            catch(Exception e){
 
-        }
-        break;
-      case 9:
-        try {
+            }
+            break;
+          case 10:
+            try {
+              open = false;
+            }
+            catch(Exception e){
 
-        }
-        catch(Exception e){
-
-        }
-        break;
-      case 10:
-        try {
-          open = false;
-        }
-        catch(Exception e){
-
-        }
-        break;
+            }
+            break;
     }
 }}

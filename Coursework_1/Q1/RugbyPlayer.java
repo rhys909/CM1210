@@ -14,7 +14,7 @@ public class RugbyPlayer {
   private String stdmPstCde;
 
   //Constructors
-  
+
   public RugbyPlayer(String Name, int playerID, int triesScored, String teamName, int teamID){
     this.Name = Name;
     this.playerID = playerID;
@@ -32,8 +32,14 @@ public class RugbyPlayer {
     catch(Exception e){
       System.out.println("Invalid Name for the player!\n")
     }
+    try{
+      if playerID.matches("RFU[0-9]{5}"){
+        this.playerID = playerID;
+      }
     }
-    this.playerID = playerID;
+    catch(Exception e){
+
+    }
     this.triesScored = triesScored;
     this.teamName = teamName;
     this.teamID = teamID;
