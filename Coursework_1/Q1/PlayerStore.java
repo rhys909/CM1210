@@ -1,6 +1,8 @@
 package q1java;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class PlayerStore{
   public static void main(String args[]){
@@ -31,36 +33,43 @@ public class PlayerStore{
 
 
         switch (userChoice) {
+
           case 1:
             try {
               Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
             }
             catch(Exception e){
-
+              System.out.println("Error generating dictionary.")
             }
             break;
+
           case 2:
             try {
               System.out.println("Please enter the players first and last names seperated by a space.\n");
               String Name = textGet.nextString();
               System.out.println("Please enter the player ID in the format RFU***** where * is a digit.\n");
               String playerID = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the number of tries scored by the player.\n");
               int triesScored = numGet.nextInt();
-              System.out.println();
+              System.out.println("Please enter the name of the team the player plays for.");
               String teamName = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the team ID in the format...");
               String teamID = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the teams stadium name.");
               String stdmName = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the street which the stadium is situated.");
               String stdmStreet = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the town which the stadium is situated.");
               String stdmTown = textGet.nextString();
-              System.out.println();
+              System.out.println("Please enter the postcode for the stadium.");
               String stdmPstCde = textGet.nextString();
               //generate a player
-              RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
+              try{
+                RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
+              }
+              catch(Exception e){
+                System.out.println("Player was not successfully created")
+              }
               //add the player to the hash map
               RugbyPlayersTable.put(playerID, player.playerToString())
             }
@@ -68,20 +77,30 @@ public class PlayerStore{
               System.out.println("Error adding the player to dictionary")
             }
             break;
+
           case 3:
             try {
-
+              System.out.println("Please enter the name of the file you wish to read:\n")
+              String filename = textGet.nextString() + ".txt"
+              file = load(true, filename);
             }
             catch(Exception e){
-
+              System.out.println("Unable to load .txt file")
             }
             break;
+
           case 4:
             try {
-
+              System.out.println("Please enter a name for your new file:\n")
+              String newFile = textGet.nextString() + ".txt";
+              //generate the new file for the user
+              File file = new File("/" + newFile);
+              file.createNewFile();
+              System.out.println("New blank file created! It is called: " + newFile);
             }
-            catch(Exception e){
-
+            catch(IOException e){
+              e.printStackTrace();
+              System.out.println("Error creating a blank .txt file")
             }
             break;
           case 5:
