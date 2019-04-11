@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class PlayerStore{
   public static void main(String args[]){
@@ -22,11 +24,9 @@ public class PlayerStore{
       System.out.println("3) Read a .txt file");
       System.out.println("4) Create a blank .txt file");
       System.out.println("5) Display all rugby players details");
-      System.out.println("6) Delete an entry from the .txt file");
-      System.out.println("7) Delete an entry from the dictionary");
-      System.out.println("8) Search for a Stadium");
-      System.out.println("9) Enter the range of players you wish to view i.e. 2-6");
-      System.out.println("10) EXIT");
+      System.out.println("6) Delete an entry from the dictionary");
+      System.out.println("7) Enter the range of players you wish to view i.e. 2-6");
+      System.out.println("8) EXIT");
       System.out.println("Please enter your choice: ");
 
       int userChoice = numGet.nextInt();
@@ -34,6 +34,7 @@ public class PlayerStore{
 
 
         switch (userChoice) {
+
 
           case 1:
             try {
@@ -43,6 +44,7 @@ public class PlayerStore{
               System.out.println("Error generating dictionary.");
             }
             break;
+
 
           case 2:
             try {
@@ -79,16 +81,19 @@ public class PlayerStore{
             }
             break;
 
+
           case 3:
             try {
               System.out.println("Please enter the name of the file you wish to read:\n");
-              String filename = textGet.nextString() + ".txt";
-              file = load(true, filename);
+              String filename = textGet.nextString();
+              filename = filename + ".txt";
+              file = player.readFile(filename);
             }
             catch(Exception e){
               System.out.println("Unable to load .txt file");
             }
             break;
+
 
           case 4:
             try {
@@ -104,6 +109,8 @@ public class PlayerStore{
               System.out.println("Error creating a blank .txt file");
             }
             break;
+
+
           case 5:
             try {
               System.out.println("Would you like to view the players in the .txt file or the dictionary? \nPlease enter 1 for .txt and 2 for dictionary.");
@@ -130,45 +137,66 @@ public class PlayerStore{
                 }
               } else{
                 System.out.println("Error please enter a valid option!");
+                continue;
               }
             }
             catch(Exception e){
-
+              System.out.println("Unexpected error with case 5! Check code");
             }
             break;
+
+
           case 6:
             try {
-
+              if(RugbyPlayersTable.size() > 0){
+                System.out.println("Please enter the ID of the player that you want to delete: \n");
+                String IDtoGet = textGet.nextString();
+                for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
+                  if (entry.getKey() == IDtoGet){
+                    RugbyPlayersTable.remove(IDtoGet);
+                  }
+                }
+                System.out.println("Your new dictionary is:\n");
+                for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
+                  System.out.println(RugbyPlayersTable.getValue() + "\n");
+                }
+              } else {
+                System.out.println("Please add players to the dictionary first.");
+              }
             }
             catch(Exception e){
-
+              System.out.println("Please create a dictionary of players first");
             }
             break;
+
+
           case 7:
             try {
-
+              System.out.println("Please enter the first number in the range 0 to " + RugbyPlayersTable.size() + ":\n");
+              int firstNumber = numGet.nextInt();
+              System.out.println("Please enter the second number in the range: \n");
+              int secondNumber = numGet.nextInt();
+              if(secondNumber <= firstNumber){
+                System.out.println("Please enter a valid second number: \n");
+                secondNumber = numGet.nextInt();
+              }else{
+                continue;
+              }
+              if(firstNumber >= RugbyPlayersTable.size() || firstNumber < 0 || secondNumber > RugbyPlayersTable.size()){
+                System.out.println("Number error please try again!");
+              }else{
+                for( int i = firstNumber; i <= secondNumber; i++ ){
+                  System.out.println(RugbyPlayersTable.get(i));
+                }
+              }
             }
             catch(Exception e){
-
+              System.out.println("Error with the range input please try again.");
             }
             break;
+
+
           case 8:
-            try {
-
-            }
-            catch(Exception e){
-
-            }
-            break;
-          case 9:
-            try {
-
-            }
-            catch(Exception e){
-
-            }
-            break;
-          case 10:
             try {
               open = false;
             }
@@ -176,6 +204,8 @@ public class PlayerStore{
 
             }
             break;
+
+            
         }
     }
 
