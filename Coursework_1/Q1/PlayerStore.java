@@ -1,5 +1,3 @@
-package q1java;
-
 import java.util.*;
 import java.io.*;
 
@@ -36,7 +34,7 @@ public class PlayerStore{
 
           case 1:
             try {
-              Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
+              Hashtable<String, String> RugbyPlayersTableDummy = new Hashtable<String, String>();
             }
             catch(Exception e){
               System.out.println("Error generating dictionary.");
@@ -65,9 +63,9 @@ public class PlayerStore{
               System.out.println("Please enter the postcode for the stadium.");
               String stdmPstCde = textGet.next();
               //generate a player
-              RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
+              RugbyPlayer newPlayer = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
               //add the player to the hash map
-              RugbyPlayersTable.put(playerID, player.playerToString());
+              RugbyPlayersTable.put(playerID, newPlayer.playerToString());
             }
             catch(Exception e){
               System.out.println("Error adding the player to dictionary");
@@ -128,8 +126,8 @@ public class PlayerStore{
                 if (RugbyPlayersTable.size() == 0){
                   System.out.println("Please add some players to the dictionary");
                 } else if(RugbyPlayersTable.size() >= 1){
-                    for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet() ) {
-                      System.out.println(entry.getValue());}
+                    for (Map.Entry<String , String> entry : RugbyPlayersTable.entrySet() ) {
+                      System.out.println(RugbyPlayersTable.get(entry));}
                 } else{
                     System.out.println("Please create the dictionary of rugby players!");
                   }
@@ -149,14 +147,14 @@ public class PlayerStore{
               if(RugbyPlayersTable.size() > 0){
                 System.out.println("Please enter the ID of the player that you want to delete: \n");
                 String IDtoGet = textGet.next();
-                for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
+                for (Map.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
                   if (entry.getKey() == IDtoGet){
                     RugbyPlayersTable.remove(IDtoGet);
                   }
                 }
                 System.out.println("Your new dictionary is:\n");
-                for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
-                  System.out.println(RugbyPlayersTable.getValue() + "\n");
+                for (Map.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
+                  System.out.println(RugbyPlayersTable.get(entry) + "\n");
                 }
               } else {
                 System.out.println("Please add players to the dictionary first.");

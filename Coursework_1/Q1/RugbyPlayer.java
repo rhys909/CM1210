@@ -1,5 +1,3 @@
-package q1java;
-
 import java.util.*;
 
 public class RugbyPlayer {
