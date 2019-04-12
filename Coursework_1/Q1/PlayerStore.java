@@ -1,10 +1,7 @@
 package q1java;
 
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.io.*;
 
 
 public class PlayerStore{
@@ -13,6 +10,7 @@ public class PlayerStore{
     Scanner numGet = new Scanner(System.in);
 
     RugbyPlayer player = new RugbyPlayer();
+    Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
     //True whilst user wants to add or remove players is set to false when user choice == 10
     boolean open = true;
     String fileLoader = "";
@@ -49,30 +47,25 @@ public class PlayerStore{
           case 2:
             try {
               System.out.println("Please enter the players first and last names seperated by a space.\n");
-              String Name = textGet.nextString();
+              String Name = textGet.next();
               System.out.println("Please enter the player ID in the format RFU***** where * is a digit.\n");
-              String playerID = textGet.nextString();
+              String playerID = textGet.next();
               System.out.println("Please enter the number of tries scored by the player.\n");
               int triesScored = numGet.nextInt();
               System.out.println("Please enter the name of the team the player plays for.");
-              String teamName = textGet.nextString();
+              String teamName = textGet.next();
               System.out.println("Please enter the team ID in the format...");
-              String teamID = textGet.nextString();
+              String teamID = textGet.next();
               System.out.println("Please enter the teams stadium name.");
-              String stdmName = textGet.nextString();
+              String stdmName = textGet.next();
               System.out.println("Please enter the street which the stadium is situated.");
-              String stdmStreet = textGet.nextString();
+              String stdmStreet = textGet.next();
               System.out.println("Please enter the town which the stadium is situated.");
-              String stdmTown = textGet.nextString();
+              String stdmTown = textGet.next();
               System.out.println("Please enter the postcode for the stadium.");
-              String stdmPstCde = textGet.nextString();
+              String stdmPstCde = textGet.next();
               //generate a player
-              try{
-                RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
-              }
-              catch(Exception e){
-                System.out.println("Player was not successfully created");
-              }
+              RugbyPlayer player = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
               //add the player to the hash map
               RugbyPlayersTable.put(playerID, player.playerToString());
             }
@@ -85,9 +78,15 @@ public class PlayerStore{
           case 3:
             try {
               System.out.println("Please enter the name of the file you wish to read:\n");
-              String filename = textGet.nextString();
+              String filename = textGet.next();
               filename = filename + ".txt";
-              file = player.readFile(filename);
+              File file = new File(filename);
+              FileReader fr = new FileReader(file);
+              BufferedReader br = new BufferedReader(fr);
+              String line;
+              while((line = br.readLine()) != null){
+                System.out.println(line);
+              }
             }
             catch(Exception e){
               System.out.println("Unable to load .txt file");
@@ -98,7 +97,7 @@ public class PlayerStore{
           case 4:
             try {
               System.out.println("Please enter a name for your new file:\n");
-              String newFile = textGet.nextString() + ".txt";
+              String newFile = textGet.next() + ".txt";
               //generate the new file for the user
               File file = new File("/" + newFile);
               file.createNewFile();
@@ -117,24 +116,23 @@ public class PlayerStore{
               int choice = numGet.nextInt();
               if(choice == 1){
                 System.out.println("Please enter the name of the file which you wish to read:");
-                String filenameRead = textGet.nextString();
+                String filenameRead = textGet.next();
                 File file = new File(filenameRead);
                 int i = 0;
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String line;
                 int len = 0;
                 while((line = br.readLine()) != null) {
-                  System.out.println(line);
-              } else if (choice == 2){
+                  System.out.println(line);}
+              }else if (choice == 2){
                 if (RugbyPlayersTable.size() == 0){
                   System.out.println("Please add some players to the dictionary");
                 } else if(RugbyPlayersTable.size() >= 1){
-                  for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet() ) {
-                    System.out.println(entry.getValue());
-                  } else{
-                    System.out.println("Please create the dictionary of rugby players!")
+                    for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet() ) {
+                      System.out.println(entry.getValue());}
+                } else{
+                    System.out.println("Please create the dictionary of rugby players!");
                   }
-                }
               } else{
                 System.out.println("Error please enter a valid option!");
                 continue;
@@ -150,7 +148,7 @@ public class PlayerStore{
             try {
               if(RugbyPlayersTable.size() > 0){
                 System.out.println("Please enter the ID of the player that you want to delete: \n");
-                String IDtoGet = textGet.nextString();
+                String IDtoGet = textGet.next();
                 for (RugbyPlayersTable.Entry<String , String> entry : RugbyPlayersTable.entrySet()){
                   if (entry.getKey() == IDtoGet){
                     RugbyPlayersTable.remove(IDtoGet);
@@ -205,7 +203,7 @@ public class PlayerStore{
             }
             break;
 
-            
+
         }
     }
 
