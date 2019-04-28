@@ -6,6 +6,13 @@ public class PlayerStore{
   public static void main(String args[]){
     Scanner textGet = new Scanner(System.in);
     Scanner numGet = new Scanner(System.in);
+    Scanner textGet2 = new Scanner(System.in);
+    Scanner textGet3 = new Scanner(System.in);
+    Scanner textGet4 = new Scanner(System.in);
+    Scanner textGet5 = new Scanner(System.in);
+    Scanner textGet6 = new Scanner(System.in);
+    Scanner textGet7 = new Scanner(System.in);
+    Scanner textGet8 = new Scanner(System.in);
 
     RugbyPlayer player = new RugbyPlayer();
     Hashtable<String, String> RugbyPlayersTable = new Hashtable<String, String>();
@@ -13,8 +20,11 @@ public class PlayerStore{
     boolean open = true;
     String fileLoader = "";
 
+    //final Formatter genericFile;
+    //genericFile = new Formatter("RugbyPlayers.txt");
+
     while(open){
-      System.out.println("Please choose what you wish to do. \n \n");
+      System.out.println("\n   Please choose what you wish to do. \n");
       System.out.println("1) Create a new blank rugby player dictionary");
       System.out.println("2) Add a player to the dictionary");
       System.out.println("3) Read a .txt file");
@@ -23,7 +33,7 @@ public class PlayerStore{
       System.out.println("6) Delete an entry from the dictionary");
       System.out.println("7) Enter the range of players you wish to view i.e. 2-6");
       System.out.println("8) EXIT");
-      System.out.println("Please enter your choice: ");
+      System.out.println("\n   Please enter your choice: ");
 
       int userChoice = numGet.nextInt();
       String invalidInput;
@@ -47,25 +57,28 @@ public class PlayerStore{
               System.out.println("Please enter the players first and last names seperated by a space.\n");
               String Name = textGet.next();
               System.out.println("Please enter the player ID in the format RFU***** where * is a digit.\n");
-              String playerID = textGet.next();
+              String playerID = textGet2.next();
               System.out.println("Please enter the number of tries scored by the player.\n");
               int triesScored = numGet.nextInt();
               System.out.println("Please enter the name of the team the player plays for.");
-              String teamName = textGet.next();
-              System.out.println("Please enter the team ID in the format...");
-              String teamID = textGet.next();
+              String teamName = textGet3.next();
+              System.out.println("Please enter the team ID in the format of 3 capital letters followed by 4 digits");
+              String teamID = textGet4.next();
               System.out.println("Please enter the teams stadium name.");
-              String stdmName = textGet.next();
+              String stdmName = textGet5.next();
               System.out.println("Please enter the street which the stadium is situated.");
-              String stdmStreet = textGet.next();
+              String stdmStreet = textGet6.next();
               System.out.println("Please enter the town which the stadium is situated.");
-              String stdmTown = textGet.next();
+              String stdmTown = textGet7.next();
               System.out.println("Please enter the postcode for the stadium.");
-              String stdmPstCde = textGet.next();
+              String stdmPstCde = textGet8.next();
               //generate a player
               RugbyPlayer newPlayer = new RugbyPlayer(Name,playerID,triesScored,teamName,teamID,stdmName,stdmTown,stdmPstCde,stdmStreet);
               //add the player to the hash map
               RugbyPlayersTable.put(playerID, newPlayer.playerToString());
+              System.out.println(RugbyPlayersTable);
+              //Add the player to a generic .txt file
+              //genericFile.format(newPlayer.playerToString());
             }
             catch(Exception e){
               System.out.println("Error adding the player to dictionary");
@@ -97,8 +110,11 @@ public class PlayerStore{
               System.out.println("Please enter a name for your new file:\n");
               String newFile = textGet.next() + ".txt";
               //generate the new file for the user
-              File file = new File("/" + newFile);
-              file.createNewFile();
+              //File file = new File("/" + newFile);
+              //file.mkdir();
+              //file.createNewFile();
+              final Formatter fileGen;
+              fileGen = new Formatter(newFile);
               System.out.println("New blank file created! It is called: " + newFile);
             }
             catch(IOException e){
@@ -195,6 +211,7 @@ public class PlayerStore{
           case 8:
             try {
               open = false;
+              //newFile.close();
             }
             catch(Exception e){
 

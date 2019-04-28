@@ -52,7 +52,7 @@ public class RugbyPlayer {
 
   public void setName(String Name){
     try{
-      if (Name.matches("^[A-Z]{1}[a-z]+[A-Z]{1}[a-z]+$")){
+      if (Name.matches("^[A-Z]{1}[a-z]+[\\s]{1}[A-Z]{1}[a-z]+$")){
         this.Name = Name;
       }
     }catch(Exception e){
@@ -72,7 +72,7 @@ public class RugbyPlayer {
 
   public void setTeamName(String teamName){
     try{
-      if (teamName.matches("^[A-Za-z\\s]+")){
+      if (teamName.matches("^[A-Za-z\\s]+$")){
         this.teamName = teamName;
       }
     }catch (Exception e){
@@ -92,7 +92,7 @@ public class RugbyPlayer {
 
   public void setStadiumName(String stdmName){
     try{
-      if (stdmName.matches("^[A-Za-z\\s]+")){
+      if (stdmName.matches("^[A-Za-z\\s]+$")){
         this.stdmName = stdmName;
       }
     }catch (Exception e){
@@ -102,7 +102,7 @@ public class RugbyPlayer {
 
   public void setStadiumTown(String stdmTown){
     try{
-      if (stdmTown.matches("^[A-Za-z\\s]+")){
+      if (stdmTown.matches("^[A-Za-z\\s]+$")){
         this.stdmTown = stdmTown;
       }
     }catch (Exception e){
@@ -112,7 +112,7 @@ public class RugbyPlayer {
 
   public void setStadiumPostCode(String stdmPstCde){
     try{
-      if (stdmPstCde.matches("^[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9][A-Z]{2}$")){
+      if (stdmPstCde.matches("^[A-Z]{1,2}[0-9]{1,2}[A-Z]? [0-9]{1}[A-Z]{2}$")){
         this.stdmPstCde = stdmPstCde;
       }
     }catch(Exception e){
@@ -122,7 +122,7 @@ public class RugbyPlayer {
 
     public void setStadiumStreet(String stdmStreet){
       try{
-        if (stdmTown.matches("^[A-Za-z\\s]+")){
+        if (stdmTown.matches("^[A-Za-z\\s]+$")){
           this.stdmStreet = stdmStreet;
         }
       }catch (Exception e){
