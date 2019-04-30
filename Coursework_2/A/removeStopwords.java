@@ -2,6 +2,15 @@ import java.util.*;
 import java.io.*;
 
 public class removeStopwords{
+  public String Stopwords;
+  public String GPT2;
+
+  removeStopwords(String Stopwords, String GPT2){
+    this.Stopwords = Stopwords;
+    ths.GPT2 = GPT2;
+  }
+
+
   public static void main (String[] args ){
 
     ArrayList<String> StopwordsArray = new ArrayList<String>();
