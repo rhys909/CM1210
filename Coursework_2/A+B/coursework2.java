@@ -3,7 +3,7 @@ import java.io.*;
 
 // Rhys Connor C1821631
 
-public class MyArrayQueue{
+public class coursework2{
 
   static int mergeSortCount = 0;
 
@@ -90,7 +90,7 @@ public class MyArrayQueue{
 
   static ArrayList<String> mergeSort(ArrayList<String> GPT2Array) {
 
-    long startTime = System.currentTimeMillis();
+    long startTime = System.nanoTime();
 
     ArrayList<String> startArray = new ArrayList<String>();
     ArrayList<String> endArray = new ArrayList<String>();
@@ -119,11 +119,11 @@ public class MyArrayQueue{
 
     }
 
-    long endTime = System.currentTimeMillis();
+    long endTime = System.nanoTime();
     long timeTaken = endTime - startTime;
 
     if (mergeSortCount % 100 == 0){
-      System.out.println("The time taken to sort " + mergeSortCount + " words was " + timeTaken + " milliseconds.");
+      System.out.println("The time taken to sort " + mergeSortCount + " words was " + timeTaken + " nano seconds.");
     }
 
     return GPT2Array;
@@ -135,6 +135,8 @@ public class MyArrayQueue{
     int startPointer, endPointer, i;
     startPointer = endPointer = i = 0;
     while(startPointer < startArray.size() || endPointer < endArray.size()){
+
+      mergeSortCount++;
 
       if (startPointer < startArray.size() && endPointer < endArray.size()){
 
@@ -166,163 +168,38 @@ public class MyArrayQueue{
 
     }
 
-    mergeSortCount++;
-
   }
 
   return GPT2Array;
 
   }
 
-  // data members
-  int front;          // one counterclockwise from first element
-  int back;           // position of back element of queue
-  Object [] queue;    // element array
-
-  // constructors
-  /** create a queue with the given initial capacity */
-  public MyArrayQueue(int initialCapacity)
-  {
-     if (initialCapacity < 1)
-        throw new IllegalArgumentException
-              ("initialCapacity must be >= 1");
-     queue = new Object [initialCapacity + 1];
-
-  }
-
-  /** create a queue with initial capacity 5 */
-  public MyArrayQueue()
-  {// use default capacity of 5
-     this(5);
-  }
-
-  // methods
-  /** @return true iff queue is empty */
-  public boolean isEmpty()
-     {return front == back;}
-
-
-  /** @return front element of queue
-    * @return null if queue is empty */
-  public Object getFrontElement()
-  {
-     if (isEmpty())
-        return null;
-     else
-        return queue[(front + 1) % queue.length];
-  }
-
-  /** @return back element of queue
-    * @return null if the queue is empty */
-  public Object getBackElement()
-  {
-     if (isEmpty())
-        return null;
-     else
-        return queue[back];
-  }
-
-  /** insert theElement at the back of the queue */
-  public void enqueue(Object theElement)
-  {
-   boolean isFull = true;
-
-   for(int i =0; i < queue.length; i++){
-     if (queue[i] == null){
-       isFull = false;
-       break;
-     }
-   }
-
-   if ((queue[queue.length - 1] != null) && !isFull){
-     for (int i = 0; i < queue.length; i++){
-   if (queue[i] != null){
-      queue[i - 1] = queue[i];
-   }
-  }
-  back = (back - 1);
-  front = (front - 1);
-  }
-
-  if(isFull){
-
-    Object newQueue = new Object[queue.length * 2];
-    newQueue[back] = theElement;
-
-    for (int i = 0; i < queue.length; i++){
-      newQueue[i] = queue[i];
-    }
-
-    queue = newQueue;
-
-    System.out.println("The new queue is:\n");
-    for (Object i:queue){
-      System.out.println(i);
-    }
-
-  } else {
-
-    queue[back] = theElement;
-    System.out.println("The new queue is:\n");
-    for (Object i : queue){
-      System.out.println(i);
-    }
-
-  }
-
-  back++;
-
-  }
-
-  /** remove an element from the front of the queue
-    * @return removed element */
-  public Object dequeue()
-  {
-    try {
-      if (isEmpty()){
-        return null;
-      } else {
-
-        Object toRemove = queue[front];
-        queue[front] = null;
-        front++;
-        System.out.println(toRemove + " has beem removed from the queue!");
-
-        return toRemove;
-
-      }
-    } catch( Exception e ){
-      System.out.println("Error in dequeue!");
-    }
-  }
-
-
   public static void main(String[] args){
 
+    String filenameStop, filenameGPT2;
+    filenameGPT2 = "GPT2.txt";
+    filenameStop = "stopwords.txt";
+
     boolean open = true;
+    ArrayList<String> GPT2Array = new ArrayList<String>(removeStopwords(filenameGPT2,filenameStop));
 
     while(open){
       Scanner numGet = new Scanner(System.in);
       Scanner textGet = new Scanner(System.in);
 
-      System.out.println("\n  Please select what you wish to do from the below disk: ");
+      System.out.println("\n  Please select what you wish to do from the below list: \n");
       System.out.println("1) Insertion Sort the GPT2 file");
       System.out.println("2) Merge Sort the GPT2 File");
-      System.out.println("3) Create a queue");
-      System.out.println("4) Enqueue");
-      System.out.println("5) Dequeue");
-      System.out.println("6) Clear the queue");
-      System.out.println("7) Exit system");
+      System.out.println("3) Change the filename for the stopwords");
+      System.out.println("4) Change the filename for the GPT2 file");
+      System.out.println("5) Exit system");
       System.out.println("\n  Please enter your choice:");
 
       int usrInput = numGet.nextInt();
 
-      ArrayList<String> GPT2Array = new ArrayList<String>(removeStopwords("GPT2.txt","stopwords.txt"));
 
-      switch (usrInput) {
 
-        case 1:
-
+        if (usrInput == 1){
           try {
 
             insertionSort(GPT2Array);
@@ -332,9 +209,8 @@ public class MyArrayQueue{
             System.out.println("Insertion sort error!");
 
           }
-
-        case 2:
-
+        }
+        else if (usrInput == 2){
           try{
 
             mergeSort(GPT2Array);
@@ -344,92 +220,54 @@ public class MyArrayQueue{
             System.out.println("Merge sort error!");
 
           }
-
-        case 3:
-
+        }
+        else if (usrInput == 3){
           try{
 
-            System.out.println("Please enter the size of the queue you wish to create: ");
+            System.out.println("Please enter the name of the new stopwords file: ");
 
-            int queueSize = in.nextInt();
+            String newFilename = textGet.nextLine();
 
-            createdQueue = new MyArrayQueue(queueSize - 1);
+            filenameStop = newFilename;
 
-          } catch ( Exception e ) {
+          }catch ( Exception e ){
 
-            System.out.println("Queue creation error!");
+            System.out.println("Naming text file error!");
 
           }
-
-        case 4:
-
+        }
+        else if (usrInput == 4){
           try{
 
-            System.out.println("Item to add to the queue: \n");
+            System.out.println("Please enter the name of the new GPT2 file: ");
 
-            String newItem = textGet.nextLine();
+            String newFilename = textGet.nextLine();
 
-            createdQueue.enqueue(newItem);
+            filenameGPT2 = newFilename;
 
-          }catch ( Exception e ) {
+          }catch ( Exception e ){
 
-            System.out.println("Enqueue error!");
-
-          }
-
-        case 5:
-
-          try{
-
-            if (createdQueue.isEmpty()){
-
-              System.out.println("Queue is empty! \nPlease create a queue first!");
-
-            }
-            else {
-
-              createdQueue.dequeue();
-
-            }
-
-          } catch ( Exception e ){
-
-            System.out.println("Dequeue error!");
+            System.out.println("Naming text file error!");
 
           }
+        }
+      else if (usrInput == 5){
+        try{
 
-        case 6:
+          open = false;
 
-          try{
+        } catch ( Exception e ) {
 
-            while ( createdQueue.length != 0 ){
-              createdQueue.dequeue();
-            }
+          System.out.println("Error exiting the system!");
 
-          } catch ( Exception e ){
-
-            System.out.println("Error clearing the queue!");
-
-          }
-
-        case 7:
-
-          try{
-
-            open = false;
-
-          } catch ( Exception e ) {
-
-            System.out.println("Error exiting the system!");
-
-          }
-
-        default:
-
-          System.out.println("Please enter a valid option!");
-          break;
+        }
 
       }
+
+      else {
+        System.out.println("Please enter a valid input!");
+      }
+
     }
   }
 
